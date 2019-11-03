@@ -9,4 +9,11 @@ class Admin extends MY_Controller{
 	public function index() {
 		$this->template('index');
   }
+
+	public function auth(){
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+	}
+
 }

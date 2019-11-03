@@ -29,6 +29,8 @@
 </div>
 <!--   Core JS Files   -->
 <script src="assets/js/core/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" charset="utf-8"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" charset="utf-8"></script>
 <script src="assets/js/core/popper.min.js"></script>
 <script src="assets/js/core/bootstrap.min.js"></script>
 <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -42,6 +44,7 @@
 <script src="assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/demo/demo.js"></script>
+<script src="assets/js/custom.js"></script>
 </body>
 
 </html>

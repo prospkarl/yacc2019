@@ -1,173 +1,143 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Model extends CI_Model {
 
-  /**
-	 * getall function.
-	 *
-	 * @access public
-	 * @param mixed $table
-	 * @param mixed $id
-	 * @return object all row object
-	 */
+    public function __construct(){
+        parent::__construct();
+    }
 
-     public function gethere($key, $value){
-       $this->db->select('*');
-       $this->db->from('users');
-       $this->db->where($key, $value);
-       return $this->db->get()->result();
+    public function raw($sql,$resut = 'array'){
+        $query = $this->db->query($sql);
+        switch ($result) {
+            case 'array':
+                return $query->result_array();
+            break;
+            case 'obj':
+                return $query->result();
+            break;
+            case 'row':
+            return $query->row();
+                break;
+            case 'count':
+                return $query->num_rows();
+            break;
+            default:
+                return $query->result_array();
+            break;
+        }
+    }
+
+    public function getRows($table,$options = array(),$result = 'array'){
+        (!empty($options['select']))        ? $this->db->select($options['select']) : $this->db->select("*");
+        (!empty($options['where']))         ? $this->db->where($options['where']) : null;
+        (!empty($options['or_where']))      ? $this->db->or_where($options['or_where']) : null;
+        (!empty($options['where_not_in']))  ? $this->db->where_not_in($options['where_not_in']['col'],$options['where_not_in']['value']) : null;
+        (!empty($options['where_in']))      ? $this->db->where_in($options['where_in']['col'],$options['where_in']['value']) : null;
+        if(!empty($options['join'])){
+            foreach($options['join'] as $key => $value){
+                if(strpos($value,':') !== false){
+                    $_join = explode(":",$value);
+                    $this->db->join($key,$_join[0],$_join[1]);
+                } else {
+                    $this->db->join($key,$value);
+                }
+            }
+        }
+        if(!empty($options['search_like'])){
+            $this->db->group_start();
+            foreach($options['column_order'] as $key => $value){
+                $this->db->or_like($value, $options['search_like'], 'both');
+            }
+            $this->db->group_end();
+        }
+        (!empty($options['group'])) ? $this->db->group_by($options['group']) : null;
+        (!empty($options['limit'])) ? $this->db->limit($options['limit'][0],$options['limit'][1]) : null;
+        (!empty($options['order'])) ? $this->db->order_by($options['order']) : null;
+        $query = $this->db->get($table);
+        switch ($result) {
+            case 'array':
+                return $query->result_array();
+            break;
+            case 'obj':
+                return $query->result();
+            break;
+            case 'row':
+            return $query->row();
+                break;
+            case 'count':
+                return $query->num_rows();
+            break;
+            default:
+                return $query->result_array();
+            break;
+        }
+    }
+
+    public function get_datatables($table, $column_order, $select = "*", $where = "", $join = array(), $limit, $offset, $search, $order,$group = ''){
+	  	$this->db->from($table);
+	  	if($select){
+	  		$this->db->select($select);
+	  	}
+	  	if($where){
+	  		$this->db->where($where);
+	  	}
+        if(!empty($join)){
+            foreach($join as $key => $value){
+                if(strpos($value,':') !== false){
+                    $_join = explode(":",$value);
+                    $this->db->join($key,$_join[0],$_join[1]);
+                } else {
+                    $this->db->join($key,$value);
+                }
+            }
+        }
+	  	if($search){
+	  		$this->db->group_start();
+	  		foreach ($column_order as $item)
+	  		{
+	  			$this->db->or_like($item, $search['value']);
+	  		}
+	  		$this->db->group_end();
+	  	}
+	  	if($group)
+	  		$this->db->group_by($group);
+
+	  	if($order)
+	  		$this->db->order_by($column_order[$order['0']['column']], $order['0']['dir']);
+	    	$temp = clone $this->db;
+	    	$data['count'] = $temp->count_all_results();
+
+	  	if($limit != -1)
+	  		$this->db->limit($limit, $offset);
+
+	  	$query = $this->db->get();
+	  	$data['data'] = $query->result();
+
+	  	$this->db->from($table);
+	  	$data['count_all'] = $this->db->count_all_results();
+	  	return $data;
+	}
+
+    public function insert($table,$data){
+        $this->db->insert($table,$data);
+        return $this->db->insert_id();
+    }
+
+    public function batch_insert($table,$set){
+        $this->db->batch_insert($table,$set);
+        return true;
      }
 
-
-  	public function getData($table,$where=array(),$select='',$join=[],$jointype='',$group='',$order=[],$limit=0,$offset=0,$having=[]){
-  			$this->db->from($table);
-  			if (!empty($select)) {
-  				$this->db->select($select);
-  			}
-        if(!empty($where)){
-          if(count($where)>0){
-            foreach ($where as $key => $value){
-              $this->db->where($key, $value);
-            }
-          }else{
-            $this->db->where($where[0]);
-          }
-
-        }
-        if(!empty($join)){
-          foreach ($join as $key => $value){
-            if($jointype!=''){
-              $this->db->join($key,$value,$jointype);
-            }else{
-
-              $this->db->join($key,$value);
-            }
-
-          }
-        }
-        if(!empty($group)){
-          $this->db->group_by($group);
-        }
-        if(!empty($having)){
-          if(count($having)>1){
-            foreach ($having as $key => $value){
-              $this->db->where($key, $value);
-            }
-          }else{
-            $this->db->having($having[0]);
-          }
-
-        }
-        if(!empty($order)){
-          foreach ($order as $key => $value){
-            $this->db->order_by($key, $value);
-          }
-        }
-        if(!empty($limit)){
-          $this->db->limit($limit,$offset);
-        }
-  			return $this->db->get()->result();
-  	}
-
-    // datatable
-  	public function getDataTables($table,$where=[],$select='',$join=[],$jointype='',$group='',$order=[],$limit=0,$offset=0,$having=[],$like = array(),$or_like = array()){
-      $this->db->select($select);
-      $this->db->from($table);
-      if(!empty($join)){
-        foreach ($join as $key => $value){
-          $this->db->join($key,$value,$jointype);
-        }
-      }
-      if(!empty($where)){
-        foreach ($where as $key => $value){
-          $this->db->where($key, $value);
-        }
-      }
-      if(!empty($group)){
-        $this->db->group_by($group);
-      }
-      if(!empty($having)){
-        if(count($having)>1){
-          foreach ($having as $key => $value){
-            $this->db->where($key, $value);
-          }
-        }else{
-          $this->db->having($having[0]);
-        }
-
-      }
-      if(!empty($order)){
-        foreach ($order as $key => $value){
-          $this->db->order_by($key, $value);
-        }
-      }
-      if($limit != 0){
-        $this->db->limit($value, $offset);
-      }
-      if(!empty($like)){
-        foreach ($like as $key => $value){
-          $this->db->like($key, $value);
-        }
-      }
-      if(!empty($or_like)){
-        $this->db->group_start();
-          foreach ($or_like as $key => $value){
-            $this->db->or_like($key, $value);
-          }
-    		$this->db->group_end();
-      }
-
-      return $this->db->get()->result();
-
+    public function update($table,$set,$where = array()){
+        $this->db->where($where);
+        $this->db->update($table,$set);
+        return true;
     }
 
-    public function insertData($from, $data){
-  		if($this->db->insert($from, $data))
-  			return $this->db->insert_id();
-  		else
-  			return 0;
-  	}
-
-    public function updateData($from, $data, $where = array()) {
-  		$this->db->where($where);
-  		return $this->db->update($from, $data);
-  	}
-
-    public function deleteData($from, $where = array()){
-      return $this->db->delete($from, $where);
+    public function delete($table,$where = array()){
+        $this->db->where($where);
+        $this->db->delete($table);
+        return true;
     }
-
-    public function num_of_exams($from){
-      $this->db->select('COUNT(*) as count');
-      $this->db->from($from);
-      $query = $this->db->get();
-      if ($query->num_rows() > 0 )
-      {
-        $row = $query->row();
-        return $row->count;
-      }
-      return 0;
-    }
-
-    public function num_rows($from, $where = array()){
-      $this->db->select('COUNT(*) as count');
-      $this->db->from($from);
-      $this->db->where($where);
-      $query = $this->db->get();
-      if ($query->num_rows() > 0 )
-      {
-        $row = $query->row();
-        return $row->count;
-      }
-      return 0;
-    }
-
-    public function get_id($id, $from, $where=array()){
-      $this->db->select($id);
-      $this->db->from($from);
-      $this->db->where($where);
-      return $this->db->get()->result();
-    }
-
-
 }

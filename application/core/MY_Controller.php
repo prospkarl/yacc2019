@@ -20,6 +20,12 @@ class MY_Controller extends MX_Controller {
       $this->load->view($view, $data);
 			$this->load->view('footer');
     }
+    
+    public function login_template($view='', $data=array()){
+      $this->load->view('login_head');
+      $this->load->view($view, $data);
+      $this->load->view('login_footer');
+    }
 
     public function admin_template($view='', $data=array()){
       $this->load->view($view, $data);

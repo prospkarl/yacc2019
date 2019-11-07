@@ -7,7 +7,7 @@ class Register extends MY_Controller{
 	}
 
 	public function index() {
-		$this->template('register');
+		$this->login_template('register');
   }
 
 	public function dashboard(){

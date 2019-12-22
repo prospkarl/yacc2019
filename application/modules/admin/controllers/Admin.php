@@ -45,12 +45,15 @@ class Admin extends MY_Controller
 
 	public function getusers() {
 		// print_data($_POST);
-		$column_order = array('id', 'full_name', 'nick_name', 'age', 'birth_date', 'church', 'group', 'paid' );
+		$column_order = array('id', 'full_name', 'nick_name', 'age', 'birth_date', 'church', 'tbl_groups.group_name', 'paid' );
+		$join = array(
+			'tbl_groups' => 'tbl_groups.group_id = tbl_campers.group'
+		);
 		$limit = $this->input->post('length');
 		$offset = $this->input->post('start');
 		$search = $this->input->post('search');
 		$order = $this->input->post('order');
-		$data = $this->My_Model->get_datatables('tbl_campers', $column_order, $select = "*", $where = "", $join = array(), $limit, $offset, $search, $order, $group = '');
+		$data = $this->My_Model->get_datatables('tbl_campers', $column_order, $select = "*", $where = "", $join, $limit, $offset, $search, $order, $group = '');
 
 		echo json_encode($data);
 	}
@@ -69,6 +72,7 @@ class Admin extends MY_Controller
 			baptized as baptizedval,
 			paid,
 			paid as paidval,
+			picture,
 			date_registered,
 			additional_info
 		';

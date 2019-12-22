@@ -27,6 +27,11 @@ class MY_Controller extends MX_Controller {
     public function admin_template($view='', $data=array()){
       $this->load->view($view, $data);
     }
+
+    public function clear_template($view='', $data=array()){
+      $this->load->view($view, $data);
+    }
+
 
     public function user_template($view='', $data=array()){
       $this->load->view('header');

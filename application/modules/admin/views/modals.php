@@ -11,6 +11,11 @@
                 <h5 class="modal-title" id="exampleModalLabel">Personal Information</h5>
             </div>
             <div class="modal-body">
+              <div class="row" style="margin-bottom:2em">
+                <div class="round">
+                  <img class="avatar" src="assets/img/logo.png" alt="">
+                </div>
+              </div>
                 <div class="row" style="margin-bottom:1em">
                     <div class="col-6">
                         <small>Full Name</small>

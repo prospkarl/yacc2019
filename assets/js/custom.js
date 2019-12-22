@@ -18,7 +18,7 @@ function initDataTable(){
           { "data": "nick_name" },
           { "data": "age"},
           { "data": "church" },
-          { "data": "group", "render": function(data) {
+          { "data": "group_name", "render": function(data) {
             return (data == null) ? 'No group' : data
           }},
           {
@@ -41,7 +41,8 @@ function initDataTable(){
       ],
       "columnDefs": [
           { targets: [6], sortable: false },
-      ]
+      ],
+      "bInfo" : false
   });
 }
 
@@ -94,6 +95,8 @@ function handleView(id) {
                 $('.' + key).html(value == 1 ? 'Yes' : 'Not Yet');
               }else if (key == 'paidval' || key == 'baptizedval') {
                 $('.' + key).val(value);
+              }else if (key == 'picture') {
+                $('.avatar').attr('src', BASE_URL + 'uploads/' + value);
               } else {
                 $('.' + key).html(value);
               }

@@ -100,6 +100,13 @@
 							<p>Groups</p>
 						</a>
 					</li>
+
+					<li class="<?= ($this->router->fetch_class() == 'printid') ? 'active' : '' ?> ">
+						<a href="<?= base_url('printid') ?>">
+							<i class="nc-icon nc-camera-compact"></i>
+							<p>Print ID</p>
+						</a>
+					</li>
 				</ul>
 
 			</div>

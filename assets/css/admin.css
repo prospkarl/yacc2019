@@ -1,3 +1,15 @@
 .modal-header {
     display: block !important;
 }
+#table-campers_filter{
+  text-align: right;
+}
+.camper-data{
+  margin: 0;
+}
+.table th{
+  border: 1px solid #ccc !important;
+}
+#viewUser .form-control{
+  font-size: 20px;
+}

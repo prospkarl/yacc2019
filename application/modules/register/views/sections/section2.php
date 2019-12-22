@@ -14,6 +14,10 @@
     <div class="form-holder">
         <input type="text" name="church" placeholder="Church" class="form-control">
     </div>
+    <div class="form-holder">
+        <input type="text" name="province" placeholder="Province" class="form-control">
+    </div>
+
     <div class="form-row">
         <textarea class="form-control" name="additional_info" style="padding-top:25px" cols="30" rows="10" placeholder="Additional Info"></textarea>
     </div>

@@ -10,9 +10,6 @@ class MY_Controller extends MX_Controller {
 
     public function __construct(){
       $this->load->model('My_Model');
-
-  		$this->load->library('form_validation');
-  		$this->form_validation->CI =& $this;
     }
 
     public function template($view='', $data=array()){
@@ -20,7 +17,7 @@ class MY_Controller extends MX_Controller {
       $this->load->view($view, $data);
 			$this->load->view('footer');
     }
-    
+
     public function login_template($view='', $data=array()){
       $this->load->view('login_head');
       $this->load->view($view, $data);

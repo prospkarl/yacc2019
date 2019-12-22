@@ -44,7 +44,7 @@ class Register extends MY_Controller
 			);
 
 			$this->My_Model->update('tbl_campers', $update, $where);
-			
+
 			ajax_response('success', 'Success', 'You are registered! Wait for further instructions.');
 		} else {
 			ajax_response('error', 'Oops!', 'Something went wrong!');
@@ -59,12 +59,12 @@ class Register extends MY_Controller
 		$config['max_size']             = 999999;
 		$config['max_width']            = 99999;
 		$config['max_height']           = 99999;
-		
+
 		$this->load->library('upload', $config);
 
 		if (!$this->upload->do_upload('picture')) {
 			$error = array('error' => $this->upload->display_errors());
-			
+
 			ajax_response('error', 'Oops!', 'Something Went Wrong!',  $this->upload->display_errors());
 		} else {
 			return $this->upload->data()['file_name'];

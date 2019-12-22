@@ -3,24 +3,12 @@
 	<div class="container-fluid">
 		<div class="row">
 			<nav class="footer-nav">
-				<ul>
-					<li>
-						<a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
-					</li>
-					<li>
-						<a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
-					</li>
-					<li>
-						<a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
-					</li>
-				</ul>
-			</nav>
 			<div class="credits ml-auto">
 				<span class="copyright">
 					©
 					<script>
 						document.write(new Date().getFullYear())
-					</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+					</script>, made with <i class="fa fa-heart heart"></i> by CCCYF
 				</span>
 			</div>
 		</div>
@@ -44,6 +32,17 @@
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="assets/demo/demo.js"></script>
 <script src="assets/js/custom.js"></script>
+
+
+<script type="text/javascript">
+	<?php if ($this->session->flashdata('success')) { ?>
+		Swal.fire({
+				title: 'Success!',
+				icon: 'success',
+				text: '<?= $this->session->flashdata('success') ?>',
+		})
+	<?php  } ?>
+</script>
 </body>
 
 </html>

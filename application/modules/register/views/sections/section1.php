@@ -15,4 +15,8 @@
     <div class="form-holder">
         <input type="text" name="birth_date" placeholder="Birth Date" class="form-control">
     </div>
+    <div class="form-holder">
+        <input type="number" name="age" placeholder="Age" class="form-control">
+    </div>
+
 </section>

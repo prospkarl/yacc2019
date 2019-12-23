@@ -6,16 +6,16 @@
                   <div class="row">
                     <div class="col-6">
                       <h4 class="card-title"> For Printing</h4>
+                      <small>NOTE: Camper must be assigned to a group to print id.</small>
                     </div>
                     <div class="col-6">
                       <div class="text-right">
-                        <button type="submit" data-toggle="modal" data-target="#addGroup" class="btn btn-primary btn-round">Print all&nbsp; <i class="fa fa-print"></i></button>
+                        <button type="submit" data-toggle="modal" data-target="#addGroup" class="btn btn-primary btn-round grey">Print <span class="numbertoprint"></span> &nbsp; <i class="fa fa-print"></i></button>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="card-body">
-
                     <div class="table-responsive">
                         <table id="table-groups" class="table table-striped table-bordered" style="width:100%">
                             <thead>
@@ -36,17 +36,18 @@
                                     <td><?= $print['province'] ?></td>
                                     <td><?= $print['group_name'] ?></td>
                                     <td>
-                                      <form action="<?= base_url('printid/print') ?>" method="post">
+                                      <a href="<?= base_url('printid/print') ?>?print=<?= $print['id'] ?>" class="btn btn-sm btn-success" target="_blank">  Print <i class="fa fa-print"></i></a>
+                                      <!-- <form action="<?= base_url('printid/print') ?>" method="post">
                                         <button type="submit" class="btn btn-sm btn-success" name="id" value="<?= $print['id'] ?>">
                                           Print <i class="fa fa-print"></i>
                                         </button>
-                                      </form>
+                                      </form> -->
                                     </td>
                                   </tr>
                                 <?php endforeach; ?>
                               <?php else: ?>
                                 <tr>
-                                  <td colspan="100%">No Groups Created Yet</td>
+                                  <td colspan="100%">No Data Found</td>
                                 </tr>
                               <?php endif; ?>
                             </tbody>

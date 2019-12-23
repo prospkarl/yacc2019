@@ -25,7 +25,7 @@ $(function() {
         }
     });
 
-    // Custom Steps 
+    // Custom Steps
     $('.wizard > .steps li a').click(function() {
         $(this).parent().addClass('checked');
         $(this).parent().prevAll().addClass('checked');
@@ -118,24 +118,30 @@ function formSubmit() {
         type: 'POST',
         data: formData,
         dataType: 'json',
+        beforeSend: function(){
+          $('.loader-mask').show();
+        },
         success: function(response) {
-            Swal.fire({
-                title: response.title,
-                icon: response.type,
-                text: response.message,
-                onClose: () => {
-                    if (response.type == 'success') {
-                        window.location.reload();
-                    }
-
-                    if (response.type == 'warning') {
-                        $.each(response.returnData, function(key, value) {
-                            $('input[name="' + key + '"]').addClass('error');
-                        })
-                    }
-                }
-            })
+          Swal.fire({
+              title: response.title,
+              icon: response.type,
+              text: response.message,
+              onClose: () => {
+                  if (response.type == 'success') {
+                      window.location.reload();
+                  }
+
+                  if (response.type == 'warning') {
+                      $.each(response.returnData, function(key, value) {
+                          $('input[name="' + key + '"]').addClass('error');
+                      })
+                  }
+              }
+          })
         },
+        complete:function(){
+          $('.loader-mask').hide();
+        },
         cache: false,
         contentType: false,
         processData: false

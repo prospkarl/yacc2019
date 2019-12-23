@@ -20,6 +20,15 @@ class Admin extends MY_Controller
 		);
 
 		$data['registered'] = $this->My_Model->getRows('tbl_campers', $get_camper_options, 'count');
+
+		$for_printing_op['where'] = array( 'printed' => 0 );
+		$for_printing_op['join'] = array(
+			'tbl_groups' => 'tbl_campers.group = tbl_groups.group_id'
+		);
+		$for_printing = $this->My_Model->getRows('tbl_campers', $for_printing_op, 'count');
+
+		$data['for_printing'] = $for_printing;
+
 		$this->template('index', $data);
 	}
 
@@ -45,9 +54,9 @@ class Admin extends MY_Controller
 
 	public function getusers() {
 		// print_data($_POST);
-		$column_order = array('id', 'full_name', 'nick_name', 'age', 'birth_date', 'church', 'tbl_groups.group_name', 'paid' );
+		$column_order = array('id', 'full_name', 'nick_name', 'age', 'birth_date', 'church', 'tbl_groups.group_name', 'paid', 'date_registered' );
 		$join = array(
-			'tbl_groups' => 'tbl_groups.group_id = tbl_campers.group'
+			'tbl_groups' => 'tbl_groups.group_id = tbl_campers.group:left'
 		);
 		$limit = $this->input->post('length');
 		$offset = $this->input->post('start');
@@ -79,7 +88,7 @@ class Admin extends MY_Controller
 
 		$query_options['where'] = array('id' => $id);
 		$query_options['join'] = array(
-			'tbl_groups' => 'tbl_groups.group_id = tbl_campers.group'
+			'tbl_groups' => 'tbl_groups.group_id = tbl_campers.group:left'
 		);
 
 		$camperinfo = $this->My_Model->getRows('tbl_campers', $query_options, 'row');

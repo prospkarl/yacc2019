@@ -98,7 +98,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary action-edit">Edit</button>
                 <button type="submit" class="btn btn-success action-save" style="display:none">Save</button>
-                <!-- <button type="button" class="btn btn-success">Print ID<i class="fa fa-print"></i></button> -->
+                <a href="" class="btn btn-success action-print" target="_blank">Print ID <i class="fa fa-print"></i></a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

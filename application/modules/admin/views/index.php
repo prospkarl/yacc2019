@@ -57,6 +57,34 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="nc-icon nc-camera-compact text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">For Printing</p>
+                                <p class="card-title"><?= $for_printing; ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <hr>
+                    <div class="stats">
+                      <a href="<?= base_url('printid') ?>">
+                        <i class="fa fa-print text-info"></i> Click here to print
+                      </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -75,6 +103,7 @@
                                     <th>Church</th>
                                     <th>Group</th>
                                     <th>Paid</th>
+                                    <th>Date Registered</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>

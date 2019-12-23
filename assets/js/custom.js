@@ -31,6 +31,7 @@ function initDataTable(){
                   }
               }
           },
+          { "data": "date_registered" },
           { "data": "id",
               "render": function(data) {
                   var html = '<a href="javascript:;" data-toggle="modal" data-target="#viewUser" onclick="handleView(' + data + ')" class="btn btn-sm btn-primary"> <i class="fa fa-eye"></i> View</a>';
@@ -40,7 +41,7 @@ function initDataTable(){
           },
       ],
       "columnDefs": [
-          { targets: [6], sortable: false },
+          { targets: [4,5,7], sortable: false },
       ],
       "bInfo" : false
   });
@@ -90,6 +91,7 @@ function handleView(id) {
         type: 'POST',
         dataType: 'json',
         success: function(res) {
+          console.log(res);
             $.each(res.returnData, function(key, value) {
               if (key == 'paid' || key == 'baptized') {
                 $('.' + key).html(value == 1 ? 'Yes' : 'Not Yet');
@@ -97,6 +99,8 @@ function handleView(id) {
                 $('.' + key).val(value);
               }else if (key == 'picture') {
                 $('.avatar').attr('src', BASE_URL + 'uploads/' + value);
+              }else if (key == 'id') {
+                $('.action-print').attr('href', BASE_URL + 'printid/print?print=' + value);
               } else {
                 $('.' + key).html(value);
               }

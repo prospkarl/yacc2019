@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-6">
                       <div class="text-right">
-                        <button type="submit" data-toggle="modal" data-target="#addGroup" class="btn btn-primary btn-round grey">Print <span class="numbertoprint"></span> &nbsp; <i class="fa fa-print"></i></button>
+                        <button type="submit" data-toggle="modal" data-target="#addGroup" class="btn btn-primary btn-round grey">Print Multiple &nbsp; <i class="fa fa-print"></i></button>
                       </div>
                     </div>
                   </div>

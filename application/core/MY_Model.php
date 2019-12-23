@@ -32,6 +32,15 @@ class MY_Model extends CI_Model {
         (!empty($options['select']))        ? $this->db->select($options['select']) : $this->db->select("*");
         (!empty($options['where']))         ? $this->db->where($options['where']) : null;
         (!empty($options['or_where']))      ? $this->db->or_where($options['or_where']) : null;
+
+        if (!empty($options['or_like'])) {
+          foreach ($options['or_like'] as $like) {
+            foreach ($like as $key => $value) {
+              $this->db->or_like($key, $value);
+            }
+          }
+        }
+
         (!empty($options['where_not_in']))  ? $this->db->where_not_in($options['where_not_in']['col'],$options['where_not_in']['value']) : null;
         (!empty($options['where_in']))      ? $this->db->where_in($options['where_in']['col'],$options['where_in']['value']) : null;
         if(!empty($options['join_left'])){

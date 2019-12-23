@@ -36,12 +36,11 @@
                                     <td><?= $print['province'] ?></td>
                                     <td><?= $print['group_name'] ?></td>
                                     <td>
-                                      <a href="javascript:;" class="btn btn-sm btn-success" data-toggle="modal" data-target="#editGroup" onclick="editGroup(<?= $print['id'] ?>)">
-                                        Print <i class="fa fa-print"></i>
-                                      </a>
-                                      <!-- <a href="javascript:;">
-                                        <i class="fa fa-trash text-primary"></i>
-                                      </a> -->
+                                      <form action="<?= base_url('printid/print') ?>" method="post">
+                                        <button type="submit" class="btn btn-sm btn-success" name="id" value="<?= $print['id'] ?>">
+                                          Print <i class="fa fa-print"></i>
+                                        </button>
+                                      </form>
                                     </td>
                                   </tr>
                                 <?php endforeach; ?>

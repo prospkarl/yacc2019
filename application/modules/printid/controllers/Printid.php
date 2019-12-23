@@ -23,12 +23,15 @@ class Printid extends MY_Controller {
 	}
 
 	public function print() {
-		echo "<pre>";
-		print_r($_POST);
-		echo "</pre>";
-		$print_op['where'] = array(
-			'id' => $camper_id
+		$print_op['select'] = 'full_name, church, province, picture, group_name';
+		$print_op['join'] = array(
+			'tbl_groups' => 'tbl_campers.group = tbl_groups.group_id'
 		);
+		foreach ($_POST as $key => $value) {
+			$print_op['or_like'][] = array(
+				'id' => $value
+			);
+		}
 		$print = $this->My_Model->getRows('tbl_campers', $print_op);
 
 		$data['print'] = $print;

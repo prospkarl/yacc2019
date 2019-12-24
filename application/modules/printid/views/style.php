@@ -209,4 +209,7 @@ img.avatar {
     justify-content: center;
     align-items: center;
 }
+.preview .id-container {
+    margin: 0 0 6em;
+}
 </style>

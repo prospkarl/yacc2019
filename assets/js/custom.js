@@ -81,6 +81,39 @@ $('.action-edit').on('click', function(){
   toggleEdit();
 })
 
+$('.select-multiple').on('click', function(e){
+    if ($('.select-multiple:checked').length > 4) {
+        alert('Only a maximum of 4 camper');
+        e.preventDefault();
+    }else {
+        checkSelected();
+    }
+})
+
+$('.action-print-multiple').on('click', function(){
+    if ($(this).attr('href') == 'javascript:;') {
+        alert('Please select campers to print');
+    }
+})
+
+function checkSelected(){
+    var selected = '';
+
+    $('.select-multiple:checked').each(function(){
+        if (selected == '') {
+            selected += $(this).attr('data-camperid');
+        }else {
+            selected += '-' + $(this).attr('data-camperid');
+        }
+    });
+
+    if (selected != '') {
+        $('.action-print-multiple').attr('href', BASE_URL + 'printid/p?print='+selected);
+    }else {
+        $('.action-print-multiple').attr('href', 'javascript:;');
+    }
+}
+
 function toggleEdit(){
   $('#viewUser').toggleClass('editMode');
   $('#viewUser .camper-data, #viewUser .form-control, #viewUser .action-edit, #viewUser .action-save').toggle();

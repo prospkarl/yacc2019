@@ -31,10 +31,11 @@ class Printid extends MY_Controller {
 		);
 
 		foreach ($campers as $key => $value) {
-			$set = array( 'printed' => 1 );
-			$where = array( 'id' => $value );
-
-			$this->My_Model->update('tbl_campers', $set, $where);
+			// UPDATE PRINTED
+			// $set = array( 'printed' => 1 );
+			// $where = array( 'id' => $value );
+			//
+			// $this->My_Model->update('tbl_campers', $set, $where);
 
 			$print_op['or_like'][] = array(
 				'id' => $value

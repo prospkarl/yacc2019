@@ -101,7 +101,7 @@ function handleView(id) {
               }else if (key == 'picture') {
                 $('.avatar').attr('src', BASE_URL + 'uploads/' + value);
               }else if (key == 'id') {
-                $('.action-print').attr('href', BASE_URL + 'printid/print?print=' + value);
+                $('.action-print').attr('href', BASE_URL + 'printid/p?print=' + value);
               } else {
                 $('.' + key).html(value);
               }

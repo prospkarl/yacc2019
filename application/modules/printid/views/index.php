@@ -36,12 +36,7 @@
                                     <td><?= $print['province'] ?></td>
                                     <td><?= $print['group_name'] ?></td>
                                     <td>
-                                      <a href="<?= base_url('printid/print') ?>?print=<?= $print['id'] ?>" class="btn btn-sm btn-success" target="_blank">  Print <i class="fa fa-print"></i></a>
-                                      <!-- <form action="<?= base_url('printid/print') ?>" method="post">
-                                        <button type="submit" class="btn btn-sm btn-success" name="id" value="<?= $print['id'] ?>">
-                                          Print <i class="fa fa-print"></i>
-                                        </button>
-                                      </form> -->
+                                      <a href="<?= base_url('printid/p') ?>?print=<?= $print['id'] ?>" class="btn btn-sm btn-success" target="_blank">  Print <i class="fa fa-print"></i></a>
                                     </td>
                                   </tr>
                                 <?php endforeach; ?>

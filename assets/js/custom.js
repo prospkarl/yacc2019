@@ -64,6 +64,7 @@ $('#viewUser form').on('submit', function(e){
           onClose: () => {
             initDataTable();
             toggleEdit();
+            handleView($('#viewUser').find('input[name="id"]').val());
           }
       })
     }
@@ -110,13 +111,13 @@ function handleView(id) {
     })
 }
 
+
 function editGroup(id) {
     $.ajax({
         url: BASE_URL + 'groups/groupInfo/' + id,
         type: 'POST',
         dataType: 'json',
         success: function(res) {
-          console.log(res);
           $('#editGroup').find('input[name="group_name"]').val(res.groupInfo.group_name);
           $('#editGroup').find('input[name="group_id"]').val(res.groupInfo.group_id);
 

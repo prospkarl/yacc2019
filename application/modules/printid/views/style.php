@@ -69,10 +69,12 @@ body{
   display: flex;
 }
 .w2{
-  width: 50%;
+    width: 50%;
+    position: relative;
 }
 img.logo {
-  width: 100%;
+  width: 508px;
+  height: 508px;
 }
 img.avatar {
   width: 400px;
@@ -91,10 +93,10 @@ img.avatar {
   background: #F45A25;
   color: #fff;
   position: absolute;
-  left: 50%;
   padding: 1px 1em;
   font-size: 30px;
   bottom: 0;
+  left:50%;
   transform: translate3d(-50%, 0, 10px);
   letter-spacing: 2px;
   font-weight: bold;
@@ -137,7 +139,7 @@ img.avatar {
   margin-top: 20px;
   width: 100%;
   position: absolute;
-  bottom: 30px;
+  bottom: 65px;
   left: 55%;
   transform: translate3d(-50%, 0, 0);
 }
@@ -150,4 +152,64 @@ img.avatar {
   font-weight: bold;
 }
 
+.preview{
+    text-align: center;
+    background: #fff;
+}
+
+.action-edit{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #F45A25;
+    font-family: montserrat;
+    font-weight: bold;
+}
+
+.edit-input {
+    width: 100%;
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    transform: translate3d(-50%, 0px, 0px);
+    background: #eac3b4;
+    font-size: 55px;
+    border: none;
+    text-align: center;
+}
+
+.print-button{
+    background: #F45A25;
+    display: block;
+    width: 64%;
+    margin: 0 auto;
+    font-size: 2.5em;
+    border-radius: 1em;
+    border: none;
+    color: #fff;
+    line-height: 2;
+    box-shadow: 0 0 1em #bbb;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.print-button:hover{
+    background: #b84b25;
+}
+.rotate-image{
+    background: #F45A25;
+    color: #fff;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    text-decoration: none;
+    border-radius: 4em;
+    justify-content: center;
+    align-items: center;
+}
+.preview .id-container {
+    margin: 0 0 6em;
+}
 </style>

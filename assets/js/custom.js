@@ -64,6 +64,7 @@ $('#viewUser form').on('submit', function(e){
           onClose: () => {
             initDataTable();
             toggleEdit();
+            handleView($('#viewUser').find('input[name="id"]').val());
           }
       })
     }
@@ -79,6 +80,39 @@ $('#viewUser').on('hidden.bs.modal', function () {
 $('.action-edit').on('click', function(){
   toggleEdit();
 })
+
+$('.select-multiple').on('click', function(e){
+    if ($('.select-multiple:checked').length > 4) {
+        alert('Only a maximum of 4 camper');
+        e.preventDefault();
+    }else {
+        checkSelected();
+    }
+})
+
+$('.action-print-multiple').on('click', function(){
+    if ($(this).attr('href') == 'javascript:;') {
+        alert('Please select campers to print');
+    }
+})
+
+function checkSelected(){
+    var selected = '';
+
+    $('.select-multiple:checked').each(function(){
+        if (selected == '') {
+            selected += $(this).attr('data-camperid');
+        }else {
+            selected += '-' + $(this).attr('data-camperid');
+        }
+    });
+
+    if (selected != '') {
+        $('.action-print-multiple').attr('href', BASE_URL + 'printid/p?print='+selected);
+    }else {
+        $('.action-print-multiple').attr('href', 'javascript:;');
+    }
+}
 
 function toggleEdit(){
   $('#viewUser').toggleClass('editMode');
@@ -100,7 +134,7 @@ function handleView(id) {
               }else if (key == 'picture') {
                 $('.avatar').attr('src', BASE_URL + 'uploads/' + value);
               }else if (key == 'id') {
-                $('.action-print').attr('href', BASE_URL + 'printid/print?print=' + value);
+                $('.action-print').attr('href', BASE_URL + 'printid/p?print=' + value);
               } else {
                 $('.' + key).html(value);
               }
@@ -110,13 +144,13 @@ function handleView(id) {
     })
 }
 
+
 function editGroup(id) {
     $.ajax({
         url: BASE_URL + 'groups/groupInfo/' + id,
         type: 'POST',
         dataType: 'json',
         success: function(res) {
-          console.log(res);
           $('#editGroup').find('input[name="group_name"]').val(res.groupInfo.group_name);
           $('#editGroup').find('input[name="group_id"]').val(res.groupInfo.group_id);
 

@@ -52,8 +52,7 @@ class Register extends MY_Controller
 	}
 
 
-	public function upload_picture()
-	{
+	public function upload_picture() {
 		$config['upload_path']          = FCPATH . '/uploads/';
 		$config['allowed_types']        = 'gif|jpg|png|jpeg';
 		$config['max_size']             = 9999999999;
@@ -70,4 +69,8 @@ class Register extends MY_Controller
 			return $this->upload->data()['file_name'];
 		}
 	}
+
+	public function connect() {
+		die('test');
+	}
 }

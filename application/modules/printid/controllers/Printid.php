@@ -19,10 +19,9 @@ class Printid extends MY_Controller {
 		$data['for_printing'] = $for_printing;
 
 		$this->template('index', $data);
-
 	}
 
-	public function print() {
+	public function p() {
 		$campers = $this->input->get('print');
 		$campers = explode('-', $campers);
 
@@ -30,11 +29,13 @@ class Printid extends MY_Controller {
 		$print_op['join'] = array(
 			'tbl_groups' => 'tbl_campers.group = tbl_groups.group_id'
 		);
-		foreach ($campers as $key => $value) {
-			$set = array( 'printed' => 1 );
-			$where = array( 'id' => $value );
 
-			$this->My_Model->update('tbl_campers', $set, $where);
+		foreach ($campers as $key => $value) {
+			// UPDATE PRINTED
+			// $set = array( 'printed' => 1 );
+			// $where = array( 'id' => $value );
+			//
+			// $this->My_Model->update('tbl_campers', $set, $where);
 
 			$print_op['or_like'][] = array(
 				'id' => $value

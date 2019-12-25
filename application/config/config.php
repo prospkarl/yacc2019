@@ -34,8 +34,9 @@ $config['modules_locations'] = array(
 |
 */
 
-// $config['base_url'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'];
-$config['base_url'] = 'http://localhost:81/gravity';
+$config['base_url'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/gravity/';
+// die($config['base_url']);
+// $config['base_url'] = 'http://localhost/gravity';
 
 /*
 |--------------------------------------------------------------------------
